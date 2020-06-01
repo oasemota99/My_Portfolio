@@ -2,17 +2,45 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>My Portfolio</title>
+    <title>OliviaA: Home</title>
     <link rel="stylesheet" href="style.css">
     <script src="script.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
   </head>
-  <body>
+
+<header>
+    <h1>Home</h1>
+    <p> Hey there, Welcome to my Site!</p>
+</header>
+<div class="menu">
+    <nav>
+        <a href="experience.html">Resume </a>
+        <!--
+        <a href="gallery.html"> Photos </a>
+        <a href="games.html">Wanna Play a Game? </a> 
+        -->
+    </nav>
+</div>
+  <body class="intro">
     <div id="content">
-      <h1>My Portfolio</h1>
-      <p>This is my portfolio.</p>
-      <p>Click here to get a random message:</p>
-      <button onclick="addRandomGreeting()">Hello</button>
+      <h2>About Me</h2>
+      <img src ="images/me.jpg", width="400", height="400">
+      <p class="intro">Hi! My name is Olivia Asemota. I'm a junior at Xavier University of Louisiana
+          completing a double major in computer science and philosophy
+          with a minor in political science. I'm from Tennessse and I have two brothers, one older and one younger.
+          I have one pet, a dog named Louie who we adopted two years ago. For fun I practice the guitar, read, 
+          play video games, and watch tv shows on Netflix and Hulu. A fun fact about me is that I'm a professional violist!
+          I've been playing the viola for about 12 years now and I'm in a quartet that often plays events around my city. 
+          Nice to meet you!</p>
+
+      <p>Click here to get another random fact about me! :)</p>
+      <button onclick="addRandomGreeting()">Facts</button>
       <div id="greeting-container"></div>
+
+      <a class="fa fa-github" href="https://github.com/oasemota99"></a>
+      <a class="fa fa-linkedin" href="https://www.linkedin.com/in/oliviaasemota"></a>
+ 
     </div>
   </body>
 </html>
