@@ -31,3 +31,9 @@ async function getQuote(){
     const quote = await response.text();
     document.getElementById('quote-container').innerText = quote;
 }
+async function getMessage(){
+    const response = await fetch('/data');
+    const msg = await response.text();
+    document.getElementById('sentient').innerText = msg;
+}
+
