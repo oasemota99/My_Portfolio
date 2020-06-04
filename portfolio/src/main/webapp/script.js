@@ -28,7 +28,7 @@ function addRandomGreeting() {
 }
 async function getQuote(){
     const response = await fetch('/data');
-    const quote = await response.text();
+    const quote = await response.json();
     document.getElementById('quote-container').innerText = quote;
 }
 async function getMessage(){
