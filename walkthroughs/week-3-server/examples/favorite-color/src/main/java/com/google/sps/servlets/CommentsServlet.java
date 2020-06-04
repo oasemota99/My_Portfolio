@@ -16,18 +16,21 @@ package com.google.sps.servlets;
 
 import java.io.IOException;
 import java.util.*;
+import com.google.gson.Gson;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-<<<<<<< HEAD:walkthroughs/week-3-server/examples/favorite-color/src/main/java/com/google/sps/servlets/CommentsServlet.java
 @WebServlet("/comments")
 public class CommentsServlet extends HttpServlet {
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     String quote = quotes.get((int) (Math.random() * quotes.size()));
-    response.setContentType("text/html;");
-    response.getWriter().println(quote);
+    ArrayList<String> msg = messages();
+    String message = toJson(msg);
+    response.setContentType("application/json;");
+    //response.getWriter().println(quote);
+    response.getWriter().println(message);
   }
 }
