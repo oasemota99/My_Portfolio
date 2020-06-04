@@ -36,4 +36,3 @@ async function getMessage(){
     const msg = await response.text();
     document.getElementById('sentient').innerText = msg;
 }
-
