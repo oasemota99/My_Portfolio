@@ -16,6 +16,7 @@ package com.google.sps.servlets;
 
 import java.io.IOException;
 import java.util.*;
+import com.google.gson.Gson;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -25,6 +26,7 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
     private List<String> quotes;
+    private ArrayList<String> m;
     @Override
     public void init(){
         quotes = new ArrayList<>();
@@ -35,11 +37,26 @@ public class DataServlet extends HttpServlet {
         quotes.add("You can't have everything. Where would you put it?");
         quotes.add("Well-behaved women seldom make history.");
     }
+    public ArrayList messages(){
+        m = new ArrayList<>();
+        m.add("I am a message.");
+        m.add("Wow that last message is so self aware.");
+        m.add("Wait, you all can talk?");
+        return m;
+    }
+    public String toJson(ArrayList<String> alist){
+        Gson gson = new Gson();
+        String json = gson.toJson(alist);
+        return json;
+    }
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     String quote = quotes.get((int) (Math.random() * quotes.size()));
-    response.setContentType("text/html;");
-    response.getWriter().println(quote);
+    ArrayList<String> msg = messages();
+    String message = toJson(msg);
+    response.setContentType("application/json;");
+    //response.getWriter().println(quote);
+    response.getWriter().println(message);
   }
 }
