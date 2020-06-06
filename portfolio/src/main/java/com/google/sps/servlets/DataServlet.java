@@ -26,9 +26,9 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
     private List<String> quotes;
-    private ArrayList<String> m;
+    private ArrayList<String> messages;
     @Override
-    public void init(){
+    public void init() {
         quotes = new ArrayList<>();
         quotes.add("The elevator to success is out of order. You'll have to use the stairs, one step at a time.");
         quotes.add("I always wanted to be somebody, but now I realise I should have been more specific.");
@@ -37,14 +37,14 @@ public class DataServlet extends HttpServlet {
         quotes.add("You can't have everything. Where would you put it?");
         quotes.add("Well-behaved women seldom make history.");
     }
-    public ArrayList messages(){
-        m = new ArrayList<>();
-        m.add("I am a message.");
-        m.add("Wow that last message is so self aware.");
-        m.add("Wait, you all can talk?");
+    public ArrayList create_messages() {
+        messages = new ArrayList<>();
+        messages.add("I am a message.");
+        messages.add("Wow that last message is so self aware.");
+        messages.add("Wait, you all can talk?");
         return m;
     }
-    public String toJson(ArrayList<String> alist){
+    public String toJson(ArrayList<String> alist) {
         Gson gson = new Gson();
         String json = gson.toJson(alist);
         return json;
@@ -53,10 +53,9 @@ public class DataServlet extends HttpServlet {
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     String quote = quotes.get((int) (Math.random() * quotes.size()));
-    ArrayList<String> msg = messages();
-    String message = toJson(msg);
+    ArrayList<String> msg_array = create_messages();
+    String jsonMsg = toJson(msg_array);
     response.setContentType("application/json;");
-    //response.getWriter().println(quote);
-    response.getWriter().println(message);
+    response.getWriter().println(jsonMsg);
   }
 }
