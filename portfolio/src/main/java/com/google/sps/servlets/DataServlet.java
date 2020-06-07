@@ -16,6 +16,7 @@ package com.google.sps.servlets;
 
 import java.io.IOException;
 import java.util.*;
+import com.google.gson.Gson;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -25,8 +26,9 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
     private List<String> quotes;
+    private ArrayList<String> messages;
     @Override
-    public void init(){
+    public void init() {
         quotes = new ArrayList<>();
         quotes.add("The elevator to success is out of order. You'll have to use the stairs, one step at a time.");
         quotes.add("I always wanted to be somebody, but now I realise I should have been more specific.");
@@ -35,11 +37,25 @@ public class DataServlet extends HttpServlet {
         quotes.add("You can't have everything. Where would you put it?");
         quotes.add("Well-behaved women seldom make history.");
     }
+    public ArrayList create_messages() {
+        messages = new ArrayList<>();
+        messages.add("I am a message.");
+        messages.add("Wow that last message is so self aware.");
+        messages.add("Wait, you all can talk?");
+        return messages;
+    }
+    public String toJson(ArrayList<String> alist) {
+        Gson gson = new Gson();
+        String json = gson.toJson(alist);
+        return json;
+    }
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     String quote = quotes.get((int) (Math.random() * quotes.size()));
-    response.setContentType("text/html;");
-    response.getWriter().println(quote);
+    ArrayList<String> msg_array = create_messages();
+    String jsonMsg = toJson(msg_array);
+    response.setContentType("application/json;");
+    response.getWriter().println(jsonMsg);
   }
 }
