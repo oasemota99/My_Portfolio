@@ -42,7 +42,7 @@ public class DataServlet extends HttpServlet {
         messages.add("I am a message.");
         messages.add("Wow that last message is so self aware.");
         messages.add("Wait, you all can talk?");
-        return m;
+        return messages;
     }
     public String toJson(ArrayList<String> alist) {
         Gson gson = new Gson();
