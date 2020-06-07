@@ -14,6 +14,14 @@
 
 package com.google.sps.servlets;
 
+import com.google.appengine.api.datastore.DatastoreService;
+import com.google.appengine.api.datastore.DatastoreServiceFactory;
+import com.google.appengine.api.datastore.Entity;
+import com.google.appengine.api.datastore.PreparedQuery;
+import com.google.appengine.api.datastore.Query;
+import com.google.appengine.api.datastore.Query.SortDirection;
+//import com.google.sps.data.Task;
+import com.google.gson.Gson;
 import java.io.IOException;
 import java.util.*;
 import com.google.gson.Gson;
@@ -25,38 +33,65 @@ import javax.servlet.http.HttpServletResponse;
 /** Servlet that returns some example content. TODO: modify this file to handle comments data */
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
-    private List<String> quotes;
-    private ArrayList<String> m;
-    @Override
-    public void init(){
-        quotes = new ArrayList<>();
-        quotes.add("The elevator to success is out of order. You'll have to use the stairs, one step at a time.");
-        quotes.add("I always wanted to be somebody, but now I realise I should have been more specific.");
-        quotes.add("I am so clever that sometimes I don't understand a single word of what I am saying");
-        quotes.add("People say nothing is impossible, but I do nothing every day");
-        quotes.add("You can't have everything. Where would you put it?");
-        quotes.add("Well-behaved women seldom make history.");
-    }
-    public ArrayList messages(){
-        m = new ArrayList<>();
-        m.add("I am a message.");
-        m.add("Wow that last message is so self aware.");
-        m.add("Wait, you all can talk?");
-        return m;
-    }
-    public String toJson(ArrayList<String> alist){
-        Gson gson = new Gson();
-        String json = gson.toJson(alist);
-        return json;
-    }
-
   @Override
-  public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    String quote = quotes.get((int) (Math.random() * quotes.size()));
-    ArrayList<String> msg = messages();
-    String message = toJson(msg);
-    response.setContentType("application/json;");
-    //response.getWriter().println(quote);
-    response.getWriter().println(message);
+  public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+      
+      //HTML Form Steps
+      String first = getParameter(request, "fname", "");
+      String last = getParameter(request, "lname", "");
+      String firstLast = String.format("%s %s",first,last);
+      String comment = getParameter(request, "comment", "");
+
+      HashMap<String, String> name_comment = new HashMap<String, String>();
+      name_comment.put(firstLast, comment);
+
+      //Datastore Steps
+      Entity CommTaskEntity = new Entity("CommentTask");
+      CommTaskEntity.setProperty("First", first);
+      CommTaskEntity.setProperty("Last", last);
+      CommTaskEntity.setProperty("Comment", comment);
+
+      DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+      datastore.put(CommTaskEntity);
+
+      response.setContentType("text/html");
+      response.getWriter().println(name_comment);
+
+      response.sendRedirect("/index.html");
   }
+
+// BLOCKED: (explanation for commented lines 23 & 66 - 85)
+// Getting Compling error: "/DataServlet.java:[23,27] package com.google.sps.data does not exist"
+// not sure why, but wanted to go ahead and submit for a PR to stay on track
+// The folowing lines are step 8 on the Datastore tutorial,
+// steps 1 - 7 are are complete and compile fine
+
+//   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+//       Query query = new Query("CommentTask").addSort("Last", SortDirection.DESCENDING);
+//       DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+//       PreparedQuery results = datastore.prepare(query);
+
+//       ArrayList<Task> tasks_list = new ArrayList<>();
+//       for (Entity entity : results.asIterable()) {
+//           long id = entity.getKey().getId();
+//           String first = (String) entity.getProperty("First");
+//           String last = (String) entity.getProperty("Last");
+//           String comment = (String) entity.getProperty("Comment");
+
+//           Task commtask = new Task(id,first,last,comment);
+//           tasks_list.add(commtask);
+//       }
+//       Gson gson = new Gson();
+//       response.setContentType("application/json;");
+//       response.getWriter().println(gson.toJson(tasks_list));
+//   }
+
+  private String getParameter(HttpServletRequest request, String name, String defaultValue) {
+      String value = request.getParameter(name);
+      if(value == null) {
+          return defaultValue;
+      }
+      return value;
+  }
+
 }
