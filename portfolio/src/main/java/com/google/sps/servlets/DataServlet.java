@@ -20,7 +20,7 @@ import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query;
 import com.google.appengine.api.datastore.Query.SortDirection;
-//import com.google.sps.data.Task;
+import com.google.sps.data.Comment;
 import com.google.gson.Gson;
 import java.io.IOException;
 import java.util.*;
@@ -66,25 +66,25 @@ public class DataServlet extends HttpServlet {
 // The folowing lines are step 8 on the Datastore tutorial,
 // steps 1 - 7 are are complete and compile fine
 
-//   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-//       Query query = new Query("CommentTask").addSort("Last", SortDirection.DESCENDING);
-//       DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
-//       PreparedQuery results = datastore.prepare(query);
+  public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+      Query query = new Query("CommentTask").addSort("Last", SortDirection.DESCENDING);
+      DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+      PreparedQuery results = datastore.prepare(query);
 
-//       ArrayList<Task> tasks_list = new ArrayList<>();
-//       for (Entity entity : results.asIterable()) {
-//           long id = entity.getKey().getId();
-//           String first = (String) entity.getProperty("First");
-//           String last = (String) entity.getProperty("Last");
-//           String comment = (String) entity.getProperty("Comment");
+      ArrayList<Comment> tasks_list = new ArrayList<>();
+      for (Entity entity : results.asIterable()) {
+          long id = entity.getKey().getId();
+          String first = (String) entity.getProperty("First");
+          String last = (String) entity.getProperty("Last");
+          String comment = (String) entity.getProperty("Comment");
 
-//           Task commtask = new Task(id,first,last,comment);
-//           tasks_list.add(commtask);
-//       }
-//       Gson gson = new Gson();
-//       response.setContentType("application/json;");
-//       response.getWriter().println(gson.toJson(tasks_list));
-//   }
+          Comment commtask = new Comment(id,first,last,comment);
+          tasks_list.add(commtask);
+      }
+      Gson gson = new Gson();
+      response.setContentType("application/json;");
+      response.getWriter().println(gson.toJson(tasks_list));
+  }
 
   private String getParameter(HttpServletRequest request, String name, String defaultValue) {
       String value = request.getParameter(name);
