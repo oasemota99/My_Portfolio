@@ -57,12 +57,6 @@ public class DataServlet extends HttpServlet {
       response.sendRedirect("/index.html");
   }
 
-// BLOCKED: (explanation for commented lines 23 & 66 - 85)
-// Getting Compling error: "/DataServlet.java:[23,27] package com.google.sps.data does not exist"
-// not sure why, but wanted to go ahead and submit for a PR to stay on track
-// The folowing lines are step 8 on the Datastore tutorial,
-// steps 1 - 7 are are complete and compile fine
-
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
       Query query = new Query("CommentTask").addSort("Last", SortDirection.DESCENDING);
       DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
