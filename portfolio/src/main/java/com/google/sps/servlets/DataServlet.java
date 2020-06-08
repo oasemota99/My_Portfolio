@@ -46,16 +46,13 @@ public class DataServlet extends HttpServlet {
       name_comment.put(firstLast, comment);
 
       //Datastore Steps
-      Entity CommTaskEntity = new Entity("CommentTask");
-      CommTaskEntity.setProperty("First", first);
-      CommTaskEntity.setProperty("Last", last);
-      CommTaskEntity.setProperty("Comment", comment);
+      Entity commTaskEntity = new Entity("CommentTask");
+      commTaskEntity.setProperty("First", first);
+      commTaskEntity.setProperty("Last", last);
+      commTaskEntity.setProperty("Comment", comment);
 
       DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
-      datastore.put(CommTaskEntity);
-
-      response.setContentType("text/html");
-      response.getWriter().println(name_comment);
+      datastore.put(commTaskEntity);
 
       response.sendRedirect("/index.html");
   }
