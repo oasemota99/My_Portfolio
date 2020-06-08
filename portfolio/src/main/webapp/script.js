@@ -27,12 +27,12 @@ function addRandomGreeting() {
   greetingContainer.innerText = greeting;
 }
 async function getQuote(){
-    const response = await fetch('/data');
-    const quote = await response.json();
+    const response = await fetch('/quoteServ');
+    const quote = await response.text();
     document.getElementById('quote-container').innerText = quote;
 }
 async function getMessage(){
-    const response = await fetch('/data');
-    const msg = await response.text();
-    document.getElementById('sentient').innerText = msg;
+    const response = await fetch('/messageServ');
+    const msg = await response.json();
+    document.getElementById('randommessage').innerText = msg;
 }

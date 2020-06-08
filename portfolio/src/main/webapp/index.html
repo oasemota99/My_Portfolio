@@ -9,40 +9,48 @@
     <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
   </head>
 
-<header>
-    <h1>Home</h1>
-    <p> Hey there, Welcome to my Site!</p>
-</header>
-<div class="menu">
-    <nav>
+    <header>
+        <h1>Home</h1>
+        <p> Hey there, Welcome to my Site!</p>
+    </header>
+    <div class="menu">
+        <nav>
+                <a href="about.html"> About </a>
         <a href="gallery.html"> Photos </a>
-    </nav>
-</div>
+        </nav>
+    </div>
   <body class="body">
     <div id="content">
-      <h2>About Me</h2>
+      <h2>Olivia Asemota</h2>
       <img class="me" src ="images/me.jpg", width="400", height="400">
-      <p class="intro">Hi! My name is Olivia Asemota. I'm a junior at Xavier University of Louisiana
-          completing a double major in computer science and philosophy
-          with a minor in political science. I'm from Tennessse and I have two brothers, one older and one younger.
-          I have one pet, a dog named Louie who we adopted two years ago. For fun I practice the guitar, read, 
-          play video games, and watch tv shows on Netflix and Hulu. A fun fact about me is that I'm a professional violist!
-          I've been playing the viola for about 12 years now and I'm in a quartet that often plays events around my city. 
-          Nice to meet you!</p>
+      <br><br>
 
-      <p>Click here to get another random fact about me! :)</p>
-      <button onclick="addRandomGreeting()">Facts</button>
-      <div id="greeting-container"></div>
+	 <h2>Fun Home Page Stuff</h2>
 
      <h3>Cheesy Quotes </h3>
      <p>Click to get a quote!</p>
-     <button onclick="getQuote()"> Get a Quote </button>
+     <button onclick="getQuote()"> Quote </button>
      <div id="quote-container"></div>
 
-     <h3>Sentient </h3>
-     <p>They speak...</p>
-     <button onclick="getMessage()"> Listen </button>
-     <div id="sentient"></div>
+     <h3>Random Message </h3>
+     <button onclick="getMessage()">Random Message </button>
+     <div id="randommessage"></div>
+    
+     <br> <br>
+
+    <form action="/data" method="POST">
+        <p>Questions, Comments, Concerns? Say it down below!</p>
+        <label for="fname"> First Name: </label> <br>
+        <input type="text" id="fname" name="fname"> <br>
+
+        <label for="lname"> Last Name: </label> <br>
+        <input type="text" id="lname" name="lname"><br>
+
+        <label for="comment">Comment: </label> <br>
+        <textarea id="comment" name="comment" rows="5" cols="35">Write your comment here.</textarea>
+        <br> <br>
+        <input type="submit" value="Submit">
+    </form>
       
       <a class="fa fa-github" href="https://github.com/oasemota99"></a>
       <a class="fa fa-linkedin" href="https://www.linkedin.com/in/oliviaasemota"></a>
