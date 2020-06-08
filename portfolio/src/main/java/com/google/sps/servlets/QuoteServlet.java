@@ -21,8 +21,8 @@ public class QuoteServlet extends HttpServlet {
         quotes.add("Well-behaved women seldom make history.");
     }
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    String quote = quotes.get((int) (Math.random() * quotes.size()));
-    response.setContentType("text/html;");
-    response.getWriter().println(quote);
+        String quote = quotes.get((int) (Math.random() * quotes.size()));
+        response.setContentType("text/html;");
+        response.getWriter().println(quote);
   }
 }
