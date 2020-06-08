@@ -42,17 +42,17 @@ public class DataServlet extends HttpServlet {
       String firstLast = String.format("%s %s",first,last);
       String comment = getParameter(request, "comment", "");
 
-      HashMap<String, String> name_comment = new HashMap<String, String>();
-      name_comment.put(firstLast, comment);
+      HashMap<String, String> nameComment = new HashMap<String, String>();
+      nameComment.put(firstLast, comment);
 
       //Datastore Steps
-      Entity commTaskEntity = new Entity("CommentTask");
-      commTaskEntity.setProperty("First", first);
-      commTaskEntity.setProperty("Last", last);
-      commTaskEntity.setProperty("Comment", comment);
+      Entity commEntity = new Entity("Comment");
+      commEntity.setProperty("First", first);
+      commEntity.setProperty("Last", last);
+      commEntity.setProperty("Comment", comment);
 
       DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
-      datastore.put(commTaskEntity);
+      datastore.put(commEntity);
 
       response.sendRedirect("/index.html");
   }
