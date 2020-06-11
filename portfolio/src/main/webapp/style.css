@@ -30,6 +30,13 @@
   border-radius: 20px;
 }
 
+#form {
+  display: block;
+  margin-left: auto;
+  margin-right: auto; 
+  border-radius: 20px;
+}
+
 .menu {
     overflow: hidden;
     background-color: #333;

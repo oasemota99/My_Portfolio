@@ -65,11 +65,10 @@ public class DataServlet extends HttpServlet {
       ArrayList<Comment> tasks_list = new ArrayList<>();
       for (Entity entity : results.asIterable()) {
           long id = entity.getKey().getId();
-          String first = (String) entity.getProperty("First");
-          String last = (String) entity.getProperty("Last");
+          String name = (String) entity.getProperty("Name");
           String comment = (String) entity.getProperty("Comment");
 
-          Comment commtask = new Comment(id,first,last,comment);
+          Comment commtask = new Comment(id, name, comment);
           tasks_list.add(commtask);
       }
       Gson gson = new Gson();

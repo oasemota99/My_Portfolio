@@ -39,6 +39,12 @@ async function getMessage(){
     document.getElementById('randommessage').innerText = msg;
 }
 
+async function getComment(){
+    const response = await fetch('/commentServ');
+    const comment = response.json();
+    document.getElementById('comments-container').innerText = comment;
+}
+
 function createMap() {
 
   var memLatLng = {lat: 35.1495, lng: -90.0490};
@@ -88,6 +94,7 @@ function createMap() {
 
 google.charts.load('current', {'packages':['corechart']});
 google.charts.setOnLoadCallback(createChart);
+
 function createChart(){
     const data = new google.visualization.DataTable();
     data.addColumn('string', 'Resturants');

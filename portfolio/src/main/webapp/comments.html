@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>OliviaA: Photos </title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <header>
+        <h1>Comments</h1>
+        <p> Comments, Questions, Concerns? Ask down below!</p>
+    </header>
+    <div class="menu">
+    <nav>
+            <a href="index.html">Home</a>
+            <a href="about.html"> About </a>
+            <a href="map.html"> Map </a>
+            <a href="chart.html"> Chart </a>
+            <a href="gallery.html"> Photos </a>
+    </nav>
+    </div>
+
+    <body>
+
+        <form id="form" action="/commentServ" method="POST">
+        <p>Questions, Comments, Concerns? Say it down below!</p>
+        <label for="name"> Name: </label> <br>
+        <input type="text" id="name" name="name"> <br>
+
+        <label for="comment">Comment: </label> <br>
+        <textarea id="comment" name="comment" placeholder="Write your comment here" rows="5" cols="50"></textarea>
+        <br> <br>
+        <input onclick="getComment()" type="submit" value="Submit">
+    </form>
+
+    <div id="comments-container"></div>
+
+    </body>
+
+</html>
