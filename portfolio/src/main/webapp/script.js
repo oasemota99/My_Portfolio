@@ -107,5 +107,5 @@ function createChart(){
         document.getElementById('chart')
     );
     chart.draw(data, chartOptions);
-    
+   
 }

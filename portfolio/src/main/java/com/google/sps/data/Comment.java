@@ -14,7 +14,6 @@
 
 package com.google.sps.data;
 
-/** An item on a todo list. */
 public final class Comment {
 
   private final long id;
@@ -28,5 +27,4 @@ public final class Comment {
     this.first = first;
     this.last = last;
     this.comment = comment;
-  }
 }
