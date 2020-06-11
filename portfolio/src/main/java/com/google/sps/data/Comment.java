@@ -27,4 +27,5 @@ public final class Comment {
     this.first = first;
     this.last = last;
     this.comment = comment;
+  }
 }
