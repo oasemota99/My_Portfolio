@@ -12,7 +12,32 @@
   margin-top: 20px;
 }
 
-.body {
+#map {
+  text-align: center;
+  border: thin solid black;
+  height: 1000px;
+  width: 1000px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto; 
+  border-radius: 20px;
+}
+
+#chart {
+  display: block;
+  margin-left: auto;
+  margin-right: auto; 
+  border-radius: 20px;
+}
+
+.menu {
+    overflow: hidden;
+    background-color: #333;
+    padding: 30px;
+    color: white;
+}
+
+body {
     background:gainsboro;
     color:black;
     margin-left: auto;
@@ -57,14 +82,8 @@ header {
   color: white;
 }
 
-.menu {
-    overflow: hidden;
-    background-color: #333;
-    padding: 30px;
-    color: white;
-}
-
 .menu a {
+  font-size: 20px;
   float: left;
   display: block;
   color: lightgray;
@@ -86,6 +105,7 @@ header {
 }
 .gallery {
     text-align: center;
+    background: white
 }
 #aboutpage {
   margin-left: auto;
