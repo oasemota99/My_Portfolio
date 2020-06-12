@@ -18,48 +18,50 @@ import javax.servlet.http.HttpServletResponse;
 
 @WebServlet("/commentServ")
 public class CommentServlet extends HttpServlet{
-    private final HashMap<String, String> commentsHistory =  new HashMap<>();
     @Override
+
+  public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+     List<Comment> loadComments = new ArrayList<>();
+
+     Query query = new Query("Comment").addSort("TimeStamp", SortDirection.ASCENDING);
+     PreparedQuery results = datastore.prepare(query);
+     System.out.println("number of elements: " + results.countEntities());
+     
+     for (Entity commEntity : results.asIterable()) {
+      
+      long id = commEntity.getKey().getId();
+      String name = (String) commEntity.getProperty("Name");
+      String comment = (String) commEntity.getProperty("Comment");
+      long timestamp = (long) commEntity.getProperty("TimeStamp");
+
+      Comment commentObj = new Comment(id, name, comment, timestamp);
+
+      loadComments.add(commentObj);
+    }
+
+    Gson gson = new Gson();
+    response.setContentType("application/json");
+    response.getWriter().println(gson.toJson(loadComments)); 
+
+  }
+
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
       
       String name = getParameter(request, "name", "");
       String comment = getParameter(request, "comment", "");
-      commentsHistory.put(name, comment);
+      long timestamp = System.currentTimeMillis();
 
-      //Datastore Steps
-      Entity commEntity = new Entity("CommentTask");
+      Entity commEntity = new Entity("Comment");
       commEntity.setProperty("Name", name);
       commEntity.setProperty("Comment", comment);
+      commEntity.setProperty("TimeStamp", timestamp);
 
       DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
       datastore.put(commEntity);
 
       response.sendRedirect("/comments.html");
   }
-  public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-      response.setContentType("application/json");
-      String jsonComment = new Gson().toJson(commentsHistory);
-      response.getWriter().println(jsonComment);
-  }
-
-//   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-//       Query query = new Query("CommentTask").addSort("Last", SortDirection.DESCENDING);
-//       DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
-//       PreparedQuery results = datastore.prepare(query);
-
-//       ArrayList<Comment> comments_list = new ArrayList<>();
-//       for (Entity entity : results.asIterable()) {
-//           long id = entity.getKey().getId();
-//           String name = (String) entity.getProperty("Name");
-//           String comment = (String) entity.getProperty("Comment");
-
-//           Comment newComment = new Comment(id, name, comment);
-//           comments_list.add(newComment);
-//       }
-//       Gson gson = new Gson();
-//       response.setContentType("application/json;");
-//       response.getWriter().println(gson.toJson(comments_list));
-//   }
 
   private String getParameter(HttpServletRequest request, String name, String defaultValue) {
       String value = request.getParameter(name);

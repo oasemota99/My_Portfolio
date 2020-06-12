@@ -30,11 +30,9 @@
   border-radius: 20px;
 }
 
-#form {
+form {
   display: block;
-  margin-left: auto;
-  margin-right: auto; 
-  border-radius: 20px;
+  margin-left: 40px;
 }
 
 .menu {
@@ -121,4 +119,5 @@ header {
   width: 650px;
   padding: 20px;
 }
+
 

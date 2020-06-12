@@ -36,52 +36,6 @@ public class DataServlet extends HttpServlet {
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
       
-      //HTML Form Steps
-      String first = getParameter(request, "fname", "");
-      String last = getParameter(request, "lname", "");
-      String firstLast = String.format("%s %s",first,last);
-      String comment = getParameter(request, "comment", "");
-
-      HashMap<String, String> name_comment = new HashMap<String, String>();
-      name_comment.put(firstLast, comment);
-
-      //Datastore Steps
-      Entity commTaskEntity = new Entity("CommentTask");
-      commTaskEntity.setProperty("First", first);
-      commTaskEntity.setProperty("Last", last);
-      commTaskEntity.setProperty("Comment", comment);
-
-      DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
-      datastore.put(commTaskEntity);
-
-      response.sendRedirect("/index.html");
-  }
-
-  public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-      Query query = new Query("CommentTask").addSort("Last", SortDirection.DESCENDING);
-      DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
-      PreparedQuery results = datastore.prepare(query);
-
-      ArrayList<Comment> tasks_list = new ArrayList<>();
-      for (Entity entity : results.asIterable()) {
-          long id = entity.getKey().getId();
-          String name = (String) entity.getProperty("Name");
-          String comment = (String) entity.getProperty("Comment");
-
-          Comment commtask = new Comment(id, name, comment);
-          tasks_list.add(commtask);
-      }
-      Gson gson = new Gson();
-      response.setContentType("application/json;");
-      response.getWriter().println(gson.toJson(tasks_list));
-  }
-
-  private String getParameter(HttpServletRequest request, String name, String defaultValue) {
-      String value = request.getParameter(name);
-      if(value == null) {
-          return defaultValue;
-      }
-      return value;
   }
 
 }
