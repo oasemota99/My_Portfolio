@@ -43,7 +43,6 @@ async function getMessage(){
 async function getCommentFromServer(){
     const response = await fetch('/commentServ');
     const jsonComments = await response.json();
-    console.log(jsonComments);
 
     const commentList = document.getElementById("comments-container");
 
