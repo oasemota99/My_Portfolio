@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 /**
  * Adds a random greeting to the page.
  */
@@ -39,8 +40,29 @@ async function getMessage(){
     document.getElementById('randommessage').innerText = msg;
 }
 
-function createMap() {
+async function getCommentFromServer(){
+    const response = await fetch('/commentServ');
+    const jsonComments = await response.json();
 
+    const commentList = document.getElementById("comments-container");
+
+    jsonComments.forEach(comment => commentList.appendChild(createCommentEle(comment))); 
+}
+
+function createCommentEle(comment) {
+  const listEle = document.createElement('li');
+  listEle.className = 'list-comments';
+  console.log("This is a comment " + comment);
+
+  const commentEle = document.createElement('span');
+  commentEle.insertAdjacentText("beforeend", "");
+  commentEle.innerText = comment.comment;
+
+  listEle.appendChild(commentEle);
+  return listEle;
+}
+
+function createMap() {
   var memLatLng = {lat: 35.1495, lng: -90.0490};
   var gusLatLng = {lat: 35.139368 , lng: -90.057269};
   var indiaPLatLng = {lat: 35.143319, lng: -90.003102};
@@ -86,8 +108,6 @@ function createMap() {
   
 }
 
-google.charts.load('current', {'packages':['corechart']});
-google.charts.setOnLoadCallback(createChart);
 function createChart(){
     const data = new google.visualization.DataTable();
     data.addColumn('string', 'Resturants');
@@ -107,5 +127,4 @@ function createChart(){
         document.getElementById('chart')
     );
     chart.draw(data, chartOptions);
-   
 }

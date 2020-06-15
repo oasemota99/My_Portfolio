@@ -17,15 +17,16 @@ package com.google.sps.data;
 public final class Comment {
 
   private final long id;
-  private final String first;
-  private final String last;
+  private final String name;
   private final String comment;
+  private final long timestamp;
   
 
-  public Comment(long id, String first, String last, String comment) {
+  public Comment(long id, String name, String comment, long timestamp) {
     this.id = id;
-    this.first = first;
-    this.last = last;
+    this.name = name;
     this.comment = comment;
+    this.timestamp = timestamp;
   }
 }
+

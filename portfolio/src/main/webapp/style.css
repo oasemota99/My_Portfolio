@@ -30,6 +30,11 @@
   border-radius: 20px;
 }
 
+form {
+  display: block;
+  margin-left: 40px;
+}
+
 .menu {
     overflow: hidden;
     background-color: #333;
@@ -114,11 +119,5 @@ header {
   width: 650px;
   padding: 20px;
 }
-#aboutpage {
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 20px;
-  width: 650px;
-  padding: 20px;
-}
+
 
