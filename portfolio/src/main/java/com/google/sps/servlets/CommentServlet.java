@@ -18,15 +18,14 @@ import javax.servlet.http.HttpServletResponse;
 
 @WebServlet("/commentServ")
 public class CommentServlet extends HttpServlet{
-    @Override
-
+  
+  @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
      DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
      List<Comment> loadComments = new ArrayList<>();
 
      Query query = new Query("Comment").addSort("TimeStamp", SortDirection.ASCENDING);
      PreparedQuery results = datastore.prepare(query);
-     System.out.println("number of elements: " + results.countEntities());
      
      for (Entity commEntity : results.asIterable()) {
       
@@ -72,3 +71,4 @@ public class CommentServlet extends HttpServlet{
   }
 
 }
+
