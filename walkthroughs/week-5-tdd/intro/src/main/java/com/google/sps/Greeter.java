@@ -22,6 +22,13 @@ public class Greeter {
    * Returns a greeting for the given name.
    */
   public String greet(String name) {
-    return "Hello " + name;
+    String fixedName = "";
+    for(int i = 0; i < name.length(); i++){
+      if(name.charAt(i) != ' '){
+        fixedName = fixedName + name.charAt(i);
+      }
+    }
+    return "Hello " + fixedName;
   }
+
 }
