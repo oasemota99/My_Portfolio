@@ -51,11 +51,8 @@ public final class FindMeetingQuery {
         if(invalid.equals(valid)) validTimes.remove(invalid);
       }
     }
-    TimeRange[] returnValidTimes = new TimeRange[validTimes.size()];
-    returnValidTimes = validTimes.toArray(returnValidTimes);
 
-    return(validTimes);
-    //return Arrays.asList(returnValidTimes);
+    return validTimes;
   }
 
   public ArrayList<TimeRange> resolveOverlaps(ArrayList<TimeRange> ranges) {
