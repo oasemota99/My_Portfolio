@@ -54,7 +54,8 @@ public final class FindMeetingQuery {
     TimeRange[] returnValidTimes = new TimeRange[validTimes.size()];
     returnValidTimes = validTimes.toArray(returnValidTimes);
 
-    return Arrays.asList(returnValidTimes);
+    return(validTimes);
+    //return Arrays.asList(returnValidTimes);
   }
 
   public ArrayList<TimeRange> resolveOverlaps(ArrayList<TimeRange> ranges) {
@@ -113,6 +114,7 @@ public final class FindMeetingQuery {
         }
       }
     }
+    Collections.sort(times, TimeRange.ORDER_BY_START);
     return times;
   }
 }

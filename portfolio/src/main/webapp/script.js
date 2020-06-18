@@ -52,7 +52,6 @@ async function getCommentFromServer(){
 function createCommentEle(comment) {
   const listEle = document.createElement('li');
   listEle.className = 'list-comments';
-  console.log("This is a comment " + comment);
 
   const commentEle = document.createElement('span');
   commentEle.insertAdjacentText("beforeend", "");

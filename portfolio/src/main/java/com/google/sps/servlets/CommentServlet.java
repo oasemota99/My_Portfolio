@@ -18,8 +18,8 @@ import javax.servlet.http.HttpServletResponse;
 
 @WebServlet("/commentServ")
 public class CommentServlet extends HttpServlet{
-    
-    @Override
+  
+  @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
      DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
      List<Comment> loadComments = new ArrayList<>();
@@ -71,3 +71,4 @@ public class CommentServlet extends HttpServlet{
   }
 
 }
+
