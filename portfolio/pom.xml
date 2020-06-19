@@ -36,12 +36,6 @@
       <artifactId>appengine-api-1.0-sdk</artifactId>
       <version>1.9.59</version>
     </dependency>
-
-    <dependency>
-      <groupId>com.google.appengine</groupId>
-      <artifactId>appengine-api-1.0-sdk</artifactId>
-      <version>1.9.59</version>
-    </dependency>
     
   </dependencies>
 
@@ -55,11 +49,7 @@
         <version>2.2.0</version>
         <configuration>
           <!-- TODO: set project ID. -->
-<<<<<<< HEAD
           <deploy.projectId>oasemota-step</deploy.projectId>
-=======
-          <deploy.projectId>oasemota-step-2020</deploy.projectId>
->>>>>>> complete Servlet and Fetch steps
           <deploy.version>1</deploy.version>
         </configuration>
       </plugin>
